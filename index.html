@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
         #map {
-            width: 1454px;
+            width: 1137px;
             height: 841px;
         }
         </style>
@@ -32,7 +32,7 @@
         <script src="js/leaflet.wms.js"></script>
         <script src="js/leaflet-measure.js"></script>
         <script src="data/FIGAREDO_FENCE_EPSG_25830_1.js"></script>
-        <script src="data/FIGAREDO_Recovery_CLC_CICES_2.js"></script>
+        <script src="data/FIGAREDO_CLC_CICES_2.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -51,7 +51,7 @@
         }
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[43.19462796515608,-5.788469078562681],[43.213883253625674,-5.744558187257296]]);
+        })
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
         var measureControl = new L.Control.Measure({
@@ -68,7 +68,9 @@
         .className += ' fas fa-ruler';
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
-            map.setMaxBounds(map.getBounds());
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
         }
         var layer_Ortoimagen_0 = L.WMS.layer("http://www.ign.es/wms-inspire/pnoa-ma", "OI.OrthoimageCoverage", {
             format: 'image/png',
@@ -93,11 +95,10 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Name'] !== null ? Autolinker.link(String(feature.properties['Name'])) : '') + '</td>\
+                        <td colspan="2"><strong>Name</strong><br />' + (feature.properties['Name'] !== null ? Autolinker.link(String(feature.properties['Name'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">descriptio</th>\
-                        <td>' + (feature.properties['descriptio'] !== null ? Autolinker.link(String(feature.properties['descriptio'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['descriptio'] !== null ? Autolinker.link(String(feature.properties['descriptio'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['timestamp'] !== null ? Autolinker.link(String(feature.properties['timestamp'])) : '') + '</td>\
@@ -153,7 +154,7 @@
         });
         bounds_group.addLayer(layer_FIGAREDO_FENCE_EPSG_25830_1);
         map.addLayer(layer_FIGAREDO_FENCE_EPSG_25830_1);
-        function pop_FIGAREDO_Recovery_CLC_CICES_2(feature, layer) {
+        function pop_FIGAREDO_CLC_CICES_2(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (i in e.target._eventParents) {
@@ -163,18 +164,6 @@
                 mouseover: highlightFeature,
             });
             var popupContent = '<table>\
-                    <tr>\
-                        <th scope="row">id</th>\
-                        <td>' + (feature.properties['id'] !== null ? Autolinker.link(String(feature.properties['id'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">CLC_lv2</th>\
-                        <td>' + (feature.properties['CLC_lv2'] !== null ? Autolinker.link(String(feature.properties['CLC_lv2'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">CLC_lv3</th>\
-                        <td>' + (feature.properties['CLC_lv3'] !== null ? Autolinker.link(String(feature.properties['CLC_lv3'])) : '') + '</td>\
-                    </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['1_CICESv51'] !== null ? Autolinker.link(String(feature.properties['1_CICESv51'])) : '') + '</td>\
                     </tr>\
@@ -191,20 +180,34 @@
                         <td colspan="2">' + (feature.properties['5_CICESv51'] !== null ? Autolinker.link(String(feature.properties['5_CICESv51'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>CLC_L2_txCLC2</strong><br />' + (feature.properties['CLC_L2_txCLC2'] !== null ? Autolinker.link(String(feature.properties['CLC_L2_txCLC2'])) : '') + '</td>\
+                        <th scope="row">AREA (Ha)</th>\
+                        <td>' + (feature.properties['AREA (Ha)'] !== null ? Autolinker.link(String(feature.properties['AREA (Ha)'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>CLC_L3_txCLC3</strong><br />' + (feature.properties['CLC_L3_txCLC3'] !== null ? Autolinker.link(String(feature.properties['CLC_L3_txCLC3'])) : '') + '</td>\
+                        <th scope="row"> Perimeter (Km)</th>\
+                        <td>' + (feature.properties[' Perimeter (Km)'] !== null ? Autolinker.link(String(feature.properties[' Perimeter (Km)'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CLC_L2_txC</th>\
+                        <td>' + (feature.properties['CLC_L2_txC'] !== null ? Autolinker.link(String(feature.properties['CLC_L2_txC'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CLC_L3_txC</th>\
+                        <td>' + (feature.properties['CLC_L3_txC'] !== null ? Autolinker.link(String(feature.properties['CLC_L3_txC'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CLCAreaSum (Ha)</th>\
+                        <td>' + (feature.properties['CLCAreaSum (Ha)'] !== null ? Autolinker.link(String(feature.properties['CLCAreaSum (Ha)'])) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_FIGAREDO_Recovery_CLC_CICES_2_0(feature) {
-            switch(String(feature.properties['CLC_L3_txCLC3'])) {
+        function style_FIGAREDO_CLC_CICES_2_0(feature) {
+            switch(String(feature.properties['CLC_L3_txC'])) {
                 case 'Broad-leaved forest':
                     return {
-                pane: 'pane_FIGAREDO_Recovery_CLC_CICES_2',
+                pane: 'pane_FIGAREDO_CLC_CICES_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.502)',
                 dashArray: '',
@@ -213,12 +216,12 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(0,255,0,0.502)',
+                fillColor: 'rgba(2,252,4,0.502)',
             }
                     break;
                 case 'Discontinuous urban fabric':
                     return {
-                pane: 'pane_FIGAREDO_Recovery_CLC_CICES_2',
+                pane: 'pane_FIGAREDO_CLC_CICES_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.502)',
                 dashArray: '',
@@ -232,7 +235,7 @@
                     break;
                 case 'Dump sites':
                     return {
-                pane: 'pane_FIGAREDO_Recovery_CLC_CICES_2',
+                pane: 'pane_FIGAREDO_CLC_CICES_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.502)',
                 dashArray: '',
@@ -241,12 +244,26 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(193,70,2,0.502)',
+                fillColor: 'rgba(188,77,0,0.502)',
+            }
+                    break;
+                case 'Industrial or commercial units':
+                    return {
+                pane: 'pane_FIGAREDO_CLC_CICES_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.502)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(238,75,254,0.502)',
             }
                     break;
                 case 'Mineral extraction sites':
                     return {
-                pane: 'pane_FIGAREDO_Recovery_CLC_CICES_2',
+                pane: 'pane_FIGAREDO_CLC_CICES_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.502)',
                 dashArray: '',
@@ -255,12 +272,12 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(197,0,201,0.502)',
+                fillColor: 'rgba(190,1,209,0.502)',
             }
                     break;
                 case 'Moors and heathland':
                     return {
-                pane: 'pane_FIGAREDO_Recovery_CLC_CICES_2',
+                pane: 'pane_FIGAREDO_CLC_CICES_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.502)',
                 dashArray: '',
@@ -274,7 +291,7 @@
                     break;
                 case 'Pastures':
                     return {
-                pane: 'pane_FIGAREDO_Recovery_CLC_CICES_2',
+                pane: 'pane_FIGAREDO_CLC_CICES_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.502)',
                 dashArray: '',
@@ -288,7 +305,7 @@
                     break;
                 case 'Transitional woodland/shrubs':
                     return {
-                pane: 'pane_FIGAREDO_Recovery_CLC_CICES_2',
+                pane: 'pane_FIGAREDO_CLC_CICES_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.502)',
                 dashArray: '',
@@ -297,61 +314,47 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(115,244,3,0.502)',
-            }
-                    break;
-                case 'Industrial or commercial units':
-                    return {
-                pane: 'pane_FIGAREDO_Recovery_CLC_CICES_2',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.502)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(151,201,15,0.502)',
+                fillColor: 'rgba(118,242,0,0.502)',
             }
                     break;
             }
         }
-        map.createPane('pane_FIGAREDO_Recovery_CLC_CICES_2');
-        map.getPane('pane_FIGAREDO_Recovery_CLC_CICES_2').style.zIndex = 402;
-        map.getPane('pane_FIGAREDO_Recovery_CLC_CICES_2').style['mix-blend-mode'] = 'normal';
-        var layer_FIGAREDO_Recovery_CLC_CICES_2 = new L.geoJson(json_FIGAREDO_Recovery_CLC_CICES_2, {
+        map.createPane('pane_FIGAREDO_CLC_CICES_2');
+        map.getPane('pane_FIGAREDO_CLC_CICES_2').style.zIndex = 402;
+        map.getPane('pane_FIGAREDO_CLC_CICES_2').style['mix-blend-mode'] = 'normal';
+        var layer_FIGAREDO_CLC_CICES_2 = new L.geoJson(json_FIGAREDO_CLC_CICES_2, {
             attribution: '',
-            pane: 'pane_FIGAREDO_Recovery_CLC_CICES_2',
-            onEachFeature: pop_FIGAREDO_Recovery_CLC_CICES_2,
-            style: style_FIGAREDO_Recovery_CLC_CICES_2_0,
+            pane: 'pane_FIGAREDO_CLC_CICES_2',
+            onEachFeature: pop_FIGAREDO_CLC_CICES_2,
+            style: style_FIGAREDO_CLC_CICES_2_0,
         });
-        bounds_group.addLayer(layer_FIGAREDO_Recovery_CLC_CICES_2);
-        map.addLayer(layer_FIGAREDO_Recovery_CLC_CICES_2);
+        bounds_group.addLayer(layer_FIGAREDO_CLC_CICES_2);
+        map.addLayer(layer_FIGAREDO_CLC_CICES_2);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'FIGAREDO_Recovery_CLC_CICES<br /><table><tr><td style="text-align: center;"><img src="legend/FIGAREDO_Recovery_CLC_CICES_2_Broadleavedforest0.png" /></td><td>Broad-leaved forest</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_Recovery_CLC_CICES_2_Discontinuousurbanfabric1.png" /></td><td>Discontinuous urban fabric</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_Recovery_CLC_CICES_2_Dumpsites2.png" /></td><td>Dump sites</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_Recovery_CLC_CICES_2_Mineralextractionsites3.png" /></td><td>Mineral extraction sites</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_Recovery_CLC_CICES_2_Moorsandheathland4.png" /></td><td>Moors and heathland</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_Recovery_CLC_CICES_2_Pastures5.png" /></td><td>Pastures</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_Recovery_CLC_CICES_2_Transitionalwoodlandshrubs6.png" /></td><td>Transitional woodland/shrubs</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_Recovery_CLC_CICES_2_Industrialorcommercialunits7.png" /></td><td>Industrial or commercial units</td></tr></table>': layer_FIGAREDO_Recovery_CLC_CICES_2,'<img src="legend/FIGAREDO_FENCE_EPSG_25830_1.png" /> FIGAREDO_FENCE_EPSG_25830': layer_FIGAREDO_FENCE_EPSG_25830_1,"Ortoimagen": layer_Ortoimagen_0,},{collapsed:false}).addTo(map);
+        L.control.layers(baseMaps,{'FIGAREDO_CLC_CICES<br /><table><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Broadleavedforest0.png" /></td><td>Broad-leaved forest</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Discontinuousurbanfabric1.png" /></td><td>Discontinuous urban fabric</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Dumpsites2.png" /></td><td>Dump sites</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Industrialorcommercialunits3.png" /></td><td>Industrial or commercial units</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Mineralextractionsites4.png" /></td><td>Mineral extraction sites</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Moorsandheathland5.png" /></td><td>Moors and heathland</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Pastures6.png" /></td><td>Pastures</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Transitionalwoodlandshrubs7.png" /></td><td>Transitional woodland/shrubs</td></tr></table>': layer_FIGAREDO_CLC_CICES_2,'<img src="legend/FIGAREDO_FENCE_EPSG_25830_1.png" /> FIGAREDO_FENCE_EPSG_25830': layer_FIGAREDO_FENCE_EPSG_25830_1,"Ortoimagen": layer_Ortoimagen_0,},{collapsed:false}).addTo(map);
         setBounds();
         var i = 0;
-        layer_FIGAREDO_Recovery_CLC_CICES_2.eachLayer(function(layer) {
+        layer_FIGAREDO_CLC_CICES_2.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['CLC_L3_txCLC3'] !== null?String('<div style="color: #000000; font-size: 9pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['CLC_L3_txCLC3']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_FIGAREDO_Recovery_CLC_CICES_2'});
+            layer.bindTooltip((layer.feature.properties['5_CICESv51'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['5_CICESv51']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_FIGAREDO_CLC_CICES_2'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
               addLabel(layer, i);
               i++;
         });
-        resetLabels([layer_FIGAREDORecoveryCLCCICES_2]);
+        resetLabels([layer_FIGAREDOCLCCICES_2]);
         map.on("zoomend", function(){
-            resetLabels([layer_FIGAREDORecoveryCLCCICES_2]);
+            resetLabels([layer_FIGAREDOCLCCICES_2]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_FIGAREDORecoveryCLCCICES_2]);
+            resetLabels([layer_FIGAREDOCLCCICES_2]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_FIGAREDORecoveryCLCCICES_2]);
+            resetLabels([layer_FIGAREDOCLCCICES_2]);
         });
         </script>
     </body>
