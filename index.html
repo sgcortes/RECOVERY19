@@ -11,8 +11,8 @@
         <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
         #map {
-            width: 1137px;
-            height: 841px;
+            width: 1321px;
+            height: 820px;
         }
         </style>
         <title></title>
@@ -31,8 +31,12 @@
         <script src="js/labels.js"></script>
         <script src="js/leaflet.wms.js"></script>
         <script src="js/leaflet-measure.js"></script>
-        <script src="data/FIGAREDO_FENCE_EPSG_25830_1.js"></script>
+        <script src="data/FIGAREDO_LIMITS_1.js"></script>
         <script src="data/FIGAREDO_CLC_CICES_2.js"></script>
+        <script src="data/2261CarbonSequestration_3.js"></script>
+        <script src="data/2262Climateregulation_4.js"></script>
+        <script src="data/2213HydrologicalCycleandwaterFlowregulation_5.js"></script>
+        <script src="data/1131Animalsrearedfornutritionalpurposes_6.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -53,7 +57,7 @@
             zoomControl:true, maxZoom:28, minZoom:1
         })
         var hash = new L.Hash(map);
-        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var measureControl = new L.Control.Measure({
             position: 'topleft',
             primaryLengthUnit: 'meters',
@@ -84,7 +88,7 @@
             attribution: '',
         });
         map.addLayer(layer_Ortoimagen_0);
-        function pop_FIGAREDO_FENCE_EPSG_25830_1(feature, layer) {
+        function pop_FIGAREDO_LIMITS_1(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (i in e.target._eventParents) {
@@ -95,65 +99,69 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2"><strong>Name</strong><br />' + (feature.properties['Name'] !== null ? Autolinker.link(String(feature.properties['Name'])) : '') + '</td>\
+                        <td colspan="2"><strong>Name</strong><br />' + (feature.properties['Name'] !== null ? Autolinker.link(feature.properties['Name'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['descriptio'] !== null ? Autolinker.link(String(feature.properties['descriptio'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['descriptio'] !== null ? Autolinker.link(feature.properties['descriptio'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['timestamp'] !== null ? Autolinker.link(String(feature.properties['timestamp'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['timestamp'] !== null ? Autolinker.link(feature.properties['timestamp'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['begin'] !== null ? Autolinker.link(String(feature.properties['begin'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['begin'] !== null ? Autolinker.link(feature.properties['begin'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['end'] !== null ? Autolinker.link(String(feature.properties['end'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['end'] !== null ? Autolinker.link(feature.properties['end'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['altitudeMo'] !== null ? Autolinker.link(String(feature.properties['altitudeMo'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['altitudeMo'] !== null ? Autolinker.link(feature.properties['altitudeMo'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['tessellate'] !== null ? Autolinker.link(String(feature.properties['tessellate'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['tessellate'] !== null ? Autolinker.link(feature.properties['tessellate'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['extrude'] !== null ? Autolinker.link(String(feature.properties['extrude'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['extrude'] !== null ? Autolinker.link(feature.properties['extrude'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['visibility'] !== null ? Autolinker.link(String(feature.properties['visibility'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['visibility'] !== null ? Autolinker.link(feature.properties['visibility'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['drawOrder'] !== null ? Autolinker.link(String(feature.properties['drawOrder'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['drawOrder'] !== null ? Autolinker.link(feature.properties['drawOrder'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['icon'] !== null ? Autolinker.link(String(feature.properties['icon'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['icon'] !== null ? Autolinker.link(feature.properties['icon'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_FIGAREDO_FENCE_EPSG_25830_1_0() {
+        function style_FIGAREDO_LIMITS_1_0() {
             return {
-                pane: 'pane_FIGAREDO_FENCE_EPSG_25830_1',
+                pane: 'pane_FIGAREDO_LIMITS_1',
                 opacity: 1,
                 color: 'rgba(228,26,28,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 4.0, 
+                weight: 7.0, 
                 fillOpacity: 0,
+                interactive: true,
             }
         }
-        map.createPane('pane_FIGAREDO_FENCE_EPSG_25830_1');
-        map.getPane('pane_FIGAREDO_FENCE_EPSG_25830_1').style.zIndex = 401;
-        map.getPane('pane_FIGAREDO_FENCE_EPSG_25830_1').style['mix-blend-mode'] = 'normal';
-        var layer_FIGAREDO_FENCE_EPSG_25830_1 = new L.geoJson(json_FIGAREDO_FENCE_EPSG_25830_1, {
+        map.createPane('pane_FIGAREDO_LIMITS_1');
+        map.getPane('pane_FIGAREDO_LIMITS_1').style.zIndex = 401;
+        map.getPane('pane_FIGAREDO_LIMITS_1').style['mix-blend-mode'] = 'normal';
+        var layer_FIGAREDO_LIMITS_1 = new L.geoJson(json_FIGAREDO_LIMITS_1, {
             attribution: '',
-            pane: 'pane_FIGAREDO_FENCE_EPSG_25830_1',
-            onEachFeature: pop_FIGAREDO_FENCE_EPSG_25830_1,
-            style: style_FIGAREDO_FENCE_EPSG_25830_1_0,
+            interactive: true,
+            dataVar: 'json_FIGAREDO_LIMITS_1',
+            layerName: 'layer_FIGAREDO_LIMITS_1',
+            pane: 'pane_FIGAREDO_LIMITS_1',
+            onEachFeature: pop_FIGAREDO_LIMITS_1,
+            style: style_FIGAREDO_LIMITS_1_0,
         });
-        bounds_group.addLayer(layer_FIGAREDO_FENCE_EPSG_25830_1);
-        map.addLayer(layer_FIGAREDO_FENCE_EPSG_25830_1);
+        bounds_group.addLayer(layer_FIGAREDO_LIMITS_1);
+        map.addLayer(layer_FIGAREDO_LIMITS_1);
         function pop_FIGAREDO_CLC_CICES_2(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -165,156 +173,177 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['1_CICESv51'] !== null ? Autolinker.link(String(feature.properties['1_CICESv51'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? Autolinker.link(feature.properties['id'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['2_CICESv51'] !== null ? Autolinker.link(String(feature.properties['2_CICESv51'])) : '') + '</td>\
+                        <th scope="row">CLC_lv2</th>\
+                        <td>' + (feature.properties['CLC_lv2'] !== null ? Autolinker.link(feature.properties['CLC_lv2'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['3_CICESv51'] !== null ? Autolinker.link(String(feature.properties['3_CICESv51'])) : '') + '</td>\
+                        <th scope="row">CLC_lv3</th>\
+                        <td>' + (feature.properties['CLC_lv3'] !== null ? Autolinker.link(feature.properties['CLC_lv3'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['4_CICESv51'] !== null ? Autolinker.link(String(feature.properties['4_CICESv51'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['2261'] !== null ? Autolinker.link(feature.properties['2261'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['5_CICESv51'] !== null ? Autolinker.link(String(feature.properties['5_CICESv51'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['1131'] !== null ? Autolinker.link(feature.properties['1131'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">AREA (Ha)</th>\
-                        <td>' + (feature.properties['AREA (Ha)'] !== null ? Autolinker.link(String(feature.properties['AREA (Ha)'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['2262'] !== null ? Autolinker.link(feature.properties['2262'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row"> Perimeter (Km)</th>\
-                        <td>' + (feature.properties[' Perimeter (Km)'] !== null ? Autolinker.link(String(feature.properties[' Perimeter (Km)'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['2213'] !== null ? Autolinker.link(feature.properties['2213'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">CLC_L2_txC</th>\
-                        <td>' + (feature.properties['CLC_L2_txC'] !== null ? Autolinker.link(String(feature.properties['CLC_L2_txC'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['5_CICESv51'] !== null ? Autolinker.link(feature.properties['5_CICESv51'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">CLC_L3_txC</th>\
-                        <td>' + (feature.properties['CLC_L3_txC'] !== null ? Autolinker.link(String(feature.properties['CLC_L3_txC'])) : '') + '</td>\
+                        <td colspan="2"><strong>AREA</strong><br />' + (feature.properties['AREA'] !== null ? Autolinker.link(feature.properties['AREA'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">CLCAreaSum (Ha)</th>\
-                        <td>' + (feature.properties['CLCAreaSum (Ha)'] !== null ? Autolinker.link(String(feature.properties['CLCAreaSum (Ha)'])) : '') + '</td>\
+                        <td colspan="2"><strong>Perimeter</strong><br />' + (feature.properties['Perimeter'] !== null ? Autolinker.link(feature.properties['Perimeter'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AREAbyCLC3'] !== null ? Autolinker.link(feature.properties['AREAbyCLC3'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>CLC_L2_txCLC2</strong><br />' + (feature.properties['CLC_L2_txCLC2'] !== null ? Autolinker.link(feature.properties['CLC_L2_txCLC2'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>CLC_L3_txCLC3</strong><br />' + (feature.properties['CLC_L3_txCLC3'] !== null ? Autolinker.link(feature.properties['CLC_L3_txCLC3'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SUMA_AREAS_POR_CLC_lv3_count</th>\
+                        <td>' + (feature.properties['SUMA_AREAS_POR_CLC_lv3_count'] !== null ? Autolinker.link(feature.properties['SUMA_AREAS_POR_CLC_lv3_count'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>SUMA_AREAS_POR_CLC_lv3_sum</strong><br />' + (feature.properties['SUMA_AREAS_POR_CLC_lv3_sum'] !== null ? Autolinker.link(feature.properties['SUMA_AREAS_POR_CLC_lv3_sum'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
         function style_FIGAREDO_CLC_CICES_2_0(feature) {
-            switch(String(feature.properties['CLC_L3_txC'])) {
+            switch(String(feature.properties['CLC_L3_txCLC3'])) {
                 case 'Broad-leaved forest':
                     return {
                 pane: 'pane_FIGAREDO_CLC_CICES_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.502)',
+                color: 'rgba(35,35,35,0.401)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(2,252,4,0.502)',
+                fillColor: 'rgba(0,255,0,0.401)',
+                interactive: true,
             }
                     break;
                 case 'Discontinuous urban fabric':
                     return {
                 pane: 'pane_FIGAREDO_CLC_CICES_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.502)',
+                color: 'rgba(35,35,35,0.401)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(254,0,0,0.502)',
+                fillColor: 'rgba(254,0,0,0.401)',
+                interactive: true,
             }
                     break;
                 case 'Dump sites':
                     return {
                 pane: 'pane_FIGAREDO_CLC_CICES_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.502)',
+                color: 'rgba(35,35,35,0.401)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(188,77,0,0.502)',
-            }
-                    break;
-                case 'Industrial or commercial units':
-                    return {
-                pane: 'pane_FIGAREDO_CLC_CICES_2',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.502)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(238,75,254,0.502)',
+                fillColor: 'rgba(193,70,2,0.401)',
+                interactive: true,
             }
                     break;
                 case 'Mineral extraction sites':
                     return {
                 pane: 'pane_FIGAREDO_CLC_CICES_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.502)',
+                color: 'rgba(35,35,35,0.401)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(190,1,209,0.502)',
+                fillColor: 'rgba(197,0,201,0.401)',
+                interactive: true,
             }
                     break;
                 case 'Moors and heathland':
                     return {
                 pane: 'pane_FIGAREDO_CLC_CICES_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.502)',
+                color: 'rgba(35,35,35,0.401)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(108,254,111,0.502)',
+                fillColor: 'rgba(108,254,111,0.401)',
+                interactive: true,
             }
                     break;
                 case 'Pastures':
                     return {
                 pane: 'pane_FIGAREDO_CLC_CICES_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.502)',
+                color: 'rgba(35,35,35,0.401)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(231,231,57,0.502)',
+                fillColor: 'rgba(231,231,57,0.401)',
+                interactive: true,
             }
                     break;
                 case 'Transitional woodland/shrubs':
                     return {
                 pane: 'pane_FIGAREDO_CLC_CICES_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.502)',
+                color: 'rgba(35,35,35,0.401)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(118,242,0,0.502)',
+                fillColor: 'rgba(115,244,3,0.401)',
+                interactive: true,
+            }
+                    break;
+                case 'Industrial or commercial units':
+                    return {
+                pane: 'pane_FIGAREDO_CLC_CICES_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.401)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(151,201,15,0.401)',
+                interactive: true,
             }
                     break;
             }
@@ -324,37 +353,617 @@
         map.getPane('pane_FIGAREDO_CLC_CICES_2').style['mix-blend-mode'] = 'normal';
         var layer_FIGAREDO_CLC_CICES_2 = new L.geoJson(json_FIGAREDO_CLC_CICES_2, {
             attribution: '',
+            interactive: true,
+            dataVar: 'json_FIGAREDO_CLC_CICES_2',
+            layerName: 'layer_FIGAREDO_CLC_CICES_2',
             pane: 'pane_FIGAREDO_CLC_CICES_2',
             onEachFeature: pop_FIGAREDO_CLC_CICES_2,
             style: style_FIGAREDO_CLC_CICES_2_0,
         });
         bounds_group.addLayer(layer_FIGAREDO_CLC_CICES_2);
         map.addLayer(layer_FIGAREDO_CLC_CICES_2);
-        var baseMaps = {};
-        L.control.layers(baseMaps,{'FIGAREDO_CLC_CICES<br /><table><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Broadleavedforest0.png" /></td><td>Broad-leaved forest</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Discontinuousurbanfabric1.png" /></td><td>Discontinuous urban fabric</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Dumpsites2.png" /></td><td>Dump sites</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Industrialorcommercialunits3.png" /></td><td>Industrial or commercial units</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Mineralextractionsites4.png" /></td><td>Mineral extraction sites</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Moorsandheathland5.png" /></td><td>Moors and heathland</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Pastures6.png" /></td><td>Pastures</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Transitionalwoodlandshrubs7.png" /></td><td>Transitional woodland/shrubs</td></tr></table>': layer_FIGAREDO_CLC_CICES_2,'<img src="legend/FIGAREDO_FENCE_EPSG_25830_1.png" /> FIGAREDO_FENCE_EPSG_25830': layer_FIGAREDO_FENCE_EPSG_25830_1,"Ortoimagen": layer_Ortoimagen_0,},{collapsed:false}).addTo(map);
-        setBounds();
-        var i = 0;
-        layer_FIGAREDO_CLC_CICES_2.eachLayer(function(layer) {
-            var context = {
-                feature: layer.feature,
-                variables: {}
-            };
-            layer.bindTooltip((layer.feature.properties['5_CICESv51'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['5_CICESv51']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_FIGAREDO_CLC_CICES_2'});
-            labels.push(layer);
-            totalMarkers += 1;
-              layer.added = true;
-              addLabel(layer, i);
-              i++;
+        function pop_2261CarbonSequestration_3(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">id</th>\
+                        <td>' + (feature.properties['id'] !== null ? Autolinker.link(feature.properties['id'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CLC_lv2</th>\
+                        <td>' + (feature.properties['CLC_lv2'] !== null ? Autolinker.link(feature.properties['CLC_lv2'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CLC_lv3</th>\
+                        <td>' + (feature.properties['CLC_lv3'] !== null ? Autolinker.link(feature.properties['CLC_lv3'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">2261</th>\
+                        <td>' + (feature.properties['2261'] !== null ? Autolinker.link(feature.properties['2261'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">1131</th>\
+                        <td>' + (feature.properties['1131'] !== null ? Autolinker.link(feature.properties['1131'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">2262</th>\
+                        <td>' + (feature.properties['2262'] !== null ? Autolinker.link(feature.properties['2262'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">2213</th>\
+                        <td>' + (feature.properties['2213'] !== null ? Autolinker.link(feature.properties['2213'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">5_CICESv51</th>\
+                        <td>' + (feature.properties['5_CICESv51'] !== null ? Autolinker.link(feature.properties['5_CICESv51'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>AREA</strong><br />' + (feature.properties['AREA'] !== null ? Autolinker.link(feature.properties['AREA'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Perimeter</strong><br />' + (feature.properties['Perimeter'] !== null ? Autolinker.link(feature.properties['Perimeter'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AREAbyCLC3'] !== null ? Autolinker.link(feature.properties['AREAbyCLC3'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>CLC_L2_txCLC2</strong><br />' + (feature.properties['CLC_L2_txCLC2'] !== null ? Autolinker.link(feature.properties['CLC_L2_txCLC2'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>CLC_L3_txCLC3</strong><br />' + (feature.properties['CLC_L3_txCLC3'] !== null ? Autolinker.link(feature.properties['CLC_L3_txCLC3'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SUMA_AREAS_POR_CLC_lv3_count</th>\
+                        <td>' + (feature.properties['SUMA_AREAS_POR_CLC_lv3_count'] !== null ? Autolinker.link(feature.properties['SUMA_AREAS_POR_CLC_lv3_count'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>SUMA_AREAS_POR_CLC_lv3_sum</strong><br />' + (feature.properties['SUMA_AREAS_POR_CLC_lv3_sum'] !== null ? Autolinker.link(feature.properties['SUMA_AREAS_POR_CLC_lv3_sum'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_2261CarbonSequestration_3_0(feature) {
+            switch(String(feature.properties['2261'])) {
+                case '0':
+                    return {
+                pane: 'pane_2261CarbonSequestration_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.401)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,4,0.401)',
+                interactive: true,
+            }
+                    break;
+                case '1':
+                    return {
+                pane: 'pane_2261CarbonSequestration_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.401)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(80,18,123,0.401)',
+                interactive: true,
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_2261CarbonSequestration_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.401)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(182,54,121,0.401)',
+                interactive: true,
+            }
+                    break;
+                case '10':
+                    return {
+                pane: 'pane_2261CarbonSequestration_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.401)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,135,97,0.401)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_2261CarbonSequestration_3');
+        map.getPane('pane_2261CarbonSequestration_3').style.zIndex = 403;
+        map.getPane('pane_2261CarbonSequestration_3').style['mix-blend-mode'] = 'normal';
+        var layer_2261CarbonSequestration_3 = new L.geoJson(json_2261CarbonSequestration_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_2261CarbonSequestration_3',
+            layerName: 'layer_2261CarbonSequestration_3',
+            pane: 'pane_2261CarbonSequestration_3',
+            onEachFeature: pop_2261CarbonSequestration_3,
+            style: style_2261CarbonSequestration_3_0,
         });
-        resetLabels([layer_FIGAREDOCLCCICES_2]);
+        bounds_group.addLayer(layer_2261CarbonSequestration_3);
+        map.addLayer(layer_2261CarbonSequestration_3);
+        function pop_2262Climateregulation_4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">id</th>\
+                        <td>' + (feature.properties['id'] !== null ? Autolinker.link(feature.properties['id'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>CLC_lv2</strong><br />' + (feature.properties['CLC_lv2'] !== null ? Autolinker.link(feature.properties['CLC_lv2'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>CLC_lv3</strong><br />' + (feature.properties['CLC_lv3'] !== null ? Autolinker.link(feature.properties['CLC_lv3'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">2261</th>\
+                        <td>' + (feature.properties['2261'] !== null ? Autolinker.link(feature.properties['2261'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">1131</th>\
+                        <td>' + (feature.properties['1131'] !== null ? Autolinker.link(feature.properties['1131'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">2262</th>\
+                        <td>' + (feature.properties['2262'] !== null ? Autolinker.link(feature.properties['2262'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">2213</th>\
+                        <td>' + (feature.properties['2213'] !== null ? Autolinker.link(feature.properties['2213'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">5_CICESv51</th>\
+                        <td>' + (feature.properties['5_CICESv51'] !== null ? Autolinker.link(feature.properties['5_CICESv51'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>AREA</strong><br />' + (feature.properties['AREA'] !== null ? Autolinker.link(feature.properties['AREA'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Perimeter</strong><br />' + (feature.properties['Perimeter'] !== null ? Autolinker.link(feature.properties['Perimeter'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AREAbyCLC3'] !== null ? Autolinker.link(feature.properties['AREAbyCLC3'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>CLC_L2_txCLC2</strong><br />' + (feature.properties['CLC_L2_txCLC2'] !== null ? Autolinker.link(feature.properties['CLC_L2_txCLC2'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>CLC_L3_txCLC3</strong><br />' + (feature.properties['CLC_L3_txCLC3'] !== null ? Autolinker.link(feature.properties['CLC_L3_txCLC3'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SUMA_AREAS_POR_CLC_lv3_count'] !== null ? Autolinker.link(feature.properties['SUMA_AREAS_POR_CLC_lv3_count'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SUMA_AREAS_POR_CLC_lv3_sum'] !== null ? Autolinker.link(feature.properties['SUMA_AREAS_POR_CLC_lv3_sum'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_2262Climateregulation_4_0(feature) {
+            switch(String(feature.properties['2262'])) {
+                case '0':
+                    return {
+                pane: 'pane_2262Climateregulation_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.401)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,251,255,0.401)',
+                interactive: true,
+            }
+                    break;
+                case '1':
+                    return {
+                pane: 'pane_2262Climateregulation_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.401)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(209,227,243,0.401)',
+                interactive: true,
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_2262Climateregulation_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.401)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(154,200,225,0.401)',
+                interactive: true,
+            }
+                    break;
+                case '7':
+                    return {
+                pane: 'pane_2262Climateregulation_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.401)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(82,157,204,0.401)',
+                interactive: true,
+            }
+                    break;
+                case '10':
+                    return {
+                pane: 'pane_2262Climateregulation_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.401)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(28,108,177,0.401)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_2262Climateregulation_4');
+        map.getPane('pane_2262Climateregulation_4').style.zIndex = 404;
+        map.getPane('pane_2262Climateregulation_4').style['mix-blend-mode'] = 'normal';
+        var layer_2262Climateregulation_4 = new L.geoJson(json_2262Climateregulation_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_2262Climateregulation_4',
+            layerName: 'layer_2262Climateregulation_4',
+            pane: 'pane_2262Climateregulation_4',
+            onEachFeature: pop_2262Climateregulation_4,
+            style: style_2262Climateregulation_4_0,
+        });
+        bounds_group.addLayer(layer_2262Climateregulation_4);
+        map.addLayer(layer_2262Climateregulation_4);
+        function pop_2213HydrologicalCycleandwaterFlowregulation_5(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">id</th>\
+                        <td>' + (feature.properties['id'] !== null ? Autolinker.link(feature.properties['id'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CLC_lv2</th>\
+                        <td>' + (feature.properties['CLC_lv2'] !== null ? Autolinker.link(feature.properties['CLC_lv2'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CLC_lv3</th>\
+                        <td>' + (feature.properties['CLC_lv3'] !== null ? Autolinker.link(feature.properties['CLC_lv3'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">2261</th>\
+                        <td>' + (feature.properties['2261'] !== null ? Autolinker.link(feature.properties['2261'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">1131</th>\
+                        <td>' + (feature.properties['1131'] !== null ? Autolinker.link(feature.properties['1131'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">2262</th>\
+                        <td>' + (feature.properties['2262'] !== null ? Autolinker.link(feature.properties['2262'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">2213</th>\
+                        <td>' + (feature.properties['2213'] !== null ? Autolinker.link(feature.properties['2213'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">5_CICESv51</th>\
+                        <td>' + (feature.properties['5_CICESv51'] !== null ? Autolinker.link(feature.properties['5_CICESv51'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">AREA</th>\
+                        <td>' + (feature.properties['AREA'] !== null ? Autolinker.link(feature.properties['AREA'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Perimeter</th>\
+                        <td>' + (feature.properties['Perimeter'] !== null ? Autolinker.link(feature.properties['Perimeter'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>AREAbyCLC3</strong><br />' + (feature.properties['AREAbyCLC3'] !== null ? Autolinker.link(feature.properties['AREAbyCLC3'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>CLC_L2_txCLC2</strong><br />' + (feature.properties['CLC_L2_txCLC2'] !== null ? Autolinker.link(feature.properties['CLC_L2_txCLC2'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>CLC_L3_txCLC3</strong><br />' + (feature.properties['CLC_L3_txCLC3'] !== null ? Autolinker.link(feature.properties['CLC_L3_txCLC3'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SUMA_AREAS_POR_CLC_lv3_count</th>\
+                        <td>' + (feature.properties['SUMA_AREAS_POR_CLC_lv3_count'] !== null ? Autolinker.link(feature.properties['SUMA_AREAS_POR_CLC_lv3_count'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SUMA_AREAS_POR_CLC_lv3_sum</th>\
+                        <td>' + (feature.properties['SUMA_AREAS_POR_CLC_lv3_sum'] !== null ? Autolinker.link(feature.properties['SUMA_AREAS_POR_CLC_lv3_sum'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_2213HydrologicalCycleandwaterFlowregulation_5_0(feature) {
+            switch(String(feature.properties['2213'])) {
+                case '0':
+                    return {
+                pane: 'pane_2213HydrologicalCycleandwaterFlowregulation_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.401)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,231,37,0.401)',
+                interactive: true,
+            }
+                    break;
+                case '1':
+                    return {
+                pane: 'pane_2213HydrologicalCycleandwaterFlowregulation_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.401)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(93,201,98,0.401)',
+                interactive: true,
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_2213HydrologicalCycleandwaterFlowregulation_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.401)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(32,144,141,0.401)',
+                interactive: true,
+            }
+                    break;
+                case '7':
+                    return {
+                pane: 'pane_2213HydrologicalCycleandwaterFlowregulation_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.401)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(58,82,139,0.401)',
+                interactive: true,
+            }
+                    break;
+                case '10':
+                    return {
+                pane: 'pane_2213HydrologicalCycleandwaterFlowregulation_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.401)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(68,1,84,0.401)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_2213HydrologicalCycleandwaterFlowregulation_5');
+        map.getPane('pane_2213HydrologicalCycleandwaterFlowregulation_5').style.zIndex = 405;
+        map.getPane('pane_2213HydrologicalCycleandwaterFlowregulation_5').style['mix-blend-mode'] = 'normal';
+        var layer_2213HydrologicalCycleandwaterFlowregulation_5 = new L.geoJson(json_2213HydrologicalCycleandwaterFlowregulation_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_2213HydrologicalCycleandwaterFlowregulation_5',
+            layerName: 'layer_2213HydrologicalCycleandwaterFlowregulation_5',
+            pane: 'pane_2213HydrologicalCycleandwaterFlowregulation_5',
+            onEachFeature: pop_2213HydrologicalCycleandwaterFlowregulation_5,
+            style: style_2213HydrologicalCycleandwaterFlowregulation_5_0,
+        });
+        bounds_group.addLayer(layer_2213HydrologicalCycleandwaterFlowregulation_5);
+        map.addLayer(layer_2213HydrologicalCycleandwaterFlowregulation_5);
+        function pop_1131Animalsrearedfornutritionalpurposes_6(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">id</th>\
+                        <td>' + (feature.properties['id'] !== null ? Autolinker.link(feature.properties['id'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CLC_lv2</th>\
+                        <td>' + (feature.properties['CLC_lv2'] !== null ? Autolinker.link(feature.properties['CLC_lv2'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CLC_lv3</th>\
+                        <td>' + (feature.properties['CLC_lv3'] !== null ? Autolinker.link(feature.properties['CLC_lv3'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">2261</th>\
+                        <td>' + (feature.properties['2261'] !== null ? Autolinker.link(feature.properties['2261'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">1131</th>\
+                        <td>' + (feature.properties['1131'] !== null ? Autolinker.link(feature.properties['1131'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">2262</th>\
+                        <td>' + (feature.properties['2262'] !== null ? Autolinker.link(feature.properties['2262'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">2213</th>\
+                        <td>' + (feature.properties['2213'] !== null ? Autolinker.link(feature.properties['2213'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">5_CICESv51</th>\
+                        <td>' + (feature.properties['5_CICESv51'] !== null ? Autolinker.link(feature.properties['5_CICESv51'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">AREA</th>\
+                        <td>' + (feature.properties['AREA'] !== null ? Autolinker.link(feature.properties['AREA'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Perimeter</th>\
+                        <td>' + (feature.properties['Perimeter'] !== null ? Autolinker.link(feature.properties['Perimeter'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">AREAbyCLC3</th>\
+                        <td>' + (feature.properties['AREAbyCLC3'] !== null ? Autolinker.link(feature.properties['AREAbyCLC3'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CLC_L2_txCLC2</th>\
+                        <td>' + (feature.properties['CLC_L2_txCLC2'] !== null ? Autolinker.link(feature.properties['CLC_L2_txCLC2'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CLC_L3_txCLC3</th>\
+                        <td>' + (feature.properties['CLC_L3_txCLC3'] !== null ? Autolinker.link(feature.properties['CLC_L3_txCLC3'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SUMA_AREAS_POR_CLC_lv3_count</th>\
+                        <td>' + (feature.properties['SUMA_AREAS_POR_CLC_lv3_count'] !== null ? Autolinker.link(feature.properties['SUMA_AREAS_POR_CLC_lv3_count'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SUMA_AREAS_POR_CLC_lv3_sum</th>\
+                        <td>' + (feature.properties['SUMA_AREAS_POR_CLC_lv3_sum'] !== null ? Autolinker.link(feature.properties['SUMA_AREAS_POR_CLC_lv3_sum'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_1131Animalsrearedfornutritionalpurposes_6_0(feature) {
+            switch(String(feature.properties['1131'])) {
+                case '0':
+                    return {
+                pane: 'pane_1131Animalsrearedfornutritionalpurposes_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.401)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,252,245,0.401)',
+                interactive: true,
+            }
+                    break;
+                case '1':
+                    return {
+                pane: 'pane_1131Animalsrearedfornutritionalpurposes_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.401)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,200,124,0.401)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_1131Animalsrearedfornutritionalpurposes_6');
+        map.getPane('pane_1131Animalsrearedfornutritionalpurposes_6').style.zIndex = 406;
+        map.getPane('pane_1131Animalsrearedfornutritionalpurposes_6').style['mix-blend-mode'] = 'normal';
+        var layer_1131Animalsrearedfornutritionalpurposes_6 = new L.geoJson(json_1131Animalsrearedfornutritionalpurposes_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_1131Animalsrearedfornutritionalpurposes_6',
+            layerName: 'layer_1131Animalsrearedfornutritionalpurposes_6',
+            pane: 'pane_1131Animalsrearedfornutritionalpurposes_6',
+            onEachFeature: pop_1131Animalsrearedfornutritionalpurposes_6,
+            style: style_1131Animalsrearedfornutritionalpurposes_6_0,
+        });
+        bounds_group.addLayer(layer_1131Animalsrearedfornutritionalpurposes_6);
+        map.addLayer(layer_1131Animalsrearedfornutritionalpurposes_6);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'1131: Animals reared for nutritional purposes<br /><table><tr><td style="text-align: center;"><img src="legend/1131Animalsrearedfornutritionalpurposes_6_00.png" /></td><td>0</td></tr><tr><td style="text-align: center;"><img src="legend/1131Animalsrearedfornutritionalpurposes_6_11.png" /></td><td>1</td></tr></table>': layer_1131Animalsrearedfornutritionalpurposes_6,'2213: Hydrological Cycle and water Flow regulation<br /><table><tr><td style="text-align: center;"><img src="legend/2213HydrologicalCycleandwaterFlowregulation_5_00.png" /></td><td>0</td></tr><tr><td style="text-align: center;"><img src="legend/2213HydrologicalCycleandwaterFlowregulation_5_11.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/2213HydrologicalCycleandwaterFlowregulation_5_42.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/2213HydrologicalCycleandwaterFlowregulation_5_73.png" /></td><td>7</td></tr><tr><td style="text-align: center;"><img src="legend/2213HydrologicalCycleandwaterFlowregulation_5_104.png" /></td><td>10</td></tr></table>': layer_2213HydrologicalCycleandwaterFlowregulation_5,'2262: Climate regulation<br /><table><tr><td style="text-align: center;"><img src="legend/2262Climateregulation_4_00.png" /></td><td>0</td></tr><tr><td style="text-align: center;"><img src="legend/2262Climateregulation_4_11.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/2262Climateregulation_4_42.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/2262Climateregulation_4_73.png" /></td><td>7</td></tr><tr><td style="text-align: center;"><img src="legend/2262Climateregulation_4_104.png" /></td><td>10</td></tr></table>': layer_2262Climateregulation_4,'2261: Carbon Sequestration<br /><table><tr><td style="text-align: center;"><img src="legend/2261CarbonSequestration_3_00.png" /></td><td>0</td></tr><tr><td style="text-align: center;"><img src="legend/2261CarbonSequestration_3_1Moorsandheathland1.png" /></td><td>1: Moors and heathland</td></tr><tr><td style="text-align: center;"><img src="legend/2261CarbonSequestration_3_5Transitionalwoodlandshurbs2.png" /></td><td>5: Transitional woodland/shurbs</td></tr><tr><td style="text-align: center;"><img src="legend/2261CarbonSequestration_3_10Broadleavedforest3.png" /></td><td>10: Broad-leaved forest</td></tr></table>': layer_2261CarbonSequestration_3,'FIGAREDO_CLC_CICES<br /><table><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Broadleavedforest0.png" /></td><td>Broad-leaved forest</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Discontinuousurbanfabric1.png" /></td><td>Discontinuous urban fabric</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Dumpsites2.png" /></td><td>Dump sites</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Mineralextractionsites3.png" /></td><td>Mineral extraction sites</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Moorsandheathland4.png" /></td><td>Moors and heathland</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Pastures5.png" /></td><td>Pastures</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Transitionalwoodlandshrubs6.png" /></td><td>Transitional woodland/shrubs</td></tr><tr><td style="text-align: center;"><img src="legend/FIGAREDO_CLC_CICES_2_Industrialorcommercialunits7.png" /></td><td>Industrial or commercial units</td></tr></table>': layer_FIGAREDO_CLC_CICES_2,'<img src="legend/FIGAREDO_LIMITS_1.png" /> FIGAREDO_LIMITS': layer_FIGAREDO_LIMITS_1,"Ortoimagen": layer_Ortoimagen_0,}).addTo(map);
+        setBounds();
+        resetLabels([layer_FIGAREDO_CLC_CICES_2,layer_2261CarbonSequestration_3,layer_2262Climateregulation_4,layer_2213HydrologicalCycleandwaterFlowregulation_5,layer_1131Animalsrearedfornutritionalpurposes_6]);
         map.on("zoomend", function(){
-            resetLabels([layer_FIGAREDOCLCCICES_2]);
+            resetLabels([layer_FIGAREDO_CLC_CICES_2,layer_2261CarbonSequestration_3,layer_2262Climateregulation_4,layer_2213HydrologicalCycleandwaterFlowregulation_5,layer_1131Animalsrearedfornutritionalpurposes_6]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_FIGAREDOCLCCICES_2]);
+            resetLabels([layer_FIGAREDO_CLC_CICES_2,layer_2261CarbonSequestration_3,layer_2262Climateregulation_4,layer_2213HydrologicalCycleandwaterFlowregulation_5,layer_1131Animalsrearedfornutritionalpurposes_6]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_FIGAREDOCLCCICES_2]);
+            resetLabels([layer_FIGAREDO_CLC_CICES_2,layer_2261CarbonSequestration_3,layer_2262Climateregulation_4,layer_2213HydrologicalCycleandwaterFlowregulation_5,layer_1131Animalsrearedfornutritionalpurposes_6]);
         });
         </script>
     </body>
